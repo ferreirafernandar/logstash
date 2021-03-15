@@ -4,11 +4,9 @@
 #
 server.name: kibana
 server.host: 0.0.0.0
-elasticsearch.hosts: "${ELASTICSEARCH_PROTOCOL}://${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}"
+elasticsearch.hosts: "${ELASTIC_PROTOCOL}://${ELASTIC_HOST}:${ELASTIC_PORT}"
 monitoring.ui.container.elasticsearch.enabled: true
-enterpriseSearch.host: "${ELASTICSEARCH_PROTOCOL}://${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}"
+enterpriseSearch.host: "${ELASTIC_PROTOCOL}://${ELASTIC_HOST}:${ELASTIC_PORT}"
 xpack.monitoring.ui.container.elasticsearch.enabled: true
-## X-Pack security credentials
-#
-elasticsearch.username: ${ELASTICSEARCH_USER}
-elasticsearch.password: ${ELASTICSEARCH_PWD}
+elasticsearch.username: ${ELASTIC_USER}
+elasticsearch.password: ${ELASTIC_PASSWORD}

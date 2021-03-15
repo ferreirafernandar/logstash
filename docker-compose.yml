@@ -5,6 +5,10 @@ services:
     container_name: postgres
     image: postgres
     restart: always
+    volumes:
+      - type: volume
+        source: elasticsearch
+        target: /usr/share/elasticsearch/bd
     ports:
       - 5432:5432  
     networks:
@@ -25,15 +29,10 @@ services:
         target: /usr/share/elasticsearch/data
     ports:
       - "9200:9200"
-      - "9300:9300"
-    environment:
-      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
-      ELASTIC_PASSWORD: changeme
-      # Use single node discovery in order to disable production mode and avoid bootstrap checks.
-      # see: https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
-      discovery.type: single-node
     networks:
       - elk
+    env_file: 
+      - '.env'  
 
   logstash:
     container_name: logstash
@@ -49,11 +48,11 @@ services:
         target: /usr/share/logstash/config/pipelines.yml
         read_only: true
       - type: bind
-        source: ./logstash/pipeline/db_local.cfg
-        target: /usr/share/logstash/pipeline/db_local.cfg
+        source: ./logstash/pipeline/db_local_test.cfg
+        target: /usr/share/logstash/pipeline/db_local_test.cfg
       - type: bind
-        source: ./logstash/pipeline/experience_voucher_inhabitants.cfg
-        target: /usr/share/logstash/pipeline/experience_voucher_inhabitants.cfg
+        source: ./logstash/pipeline/db_local_foobar.cfg
+        target: /usr/share/logstash/pipeline/db_local_foobar.cfg
         read_only: true
       - type: bind
         source: ./logstash/config/jdbc/postgresql-42.2.18.jar

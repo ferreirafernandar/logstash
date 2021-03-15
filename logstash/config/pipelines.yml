@@ -1,4 +1,4 @@
-- pipeline.id: experience_voucher_inhabitants.cfg
-  path.config: "../logstash/pipeline/experience_voucher_inhabitants.cfg"
-- pipeline.id: db_local
-  path.config: "../logstash/pipeline/db_local.cfg"
+- pipeline.id: db_local_test
+  path.config: "../logstash/pipeline/db_local_test.cfg"
+- pipeline.id: db_local_foobar
+  path.config: "../logstash/pipeline/db_local_foobar.cfg"
